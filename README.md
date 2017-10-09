@@ -40,30 +40,32 @@ capabilities_disabled: ['train', 'cluster', 'optimize']
 pipeline
 
 ### EXPECTED OUTPUT ###
-Usage:       pipeline                   <-- This CLI Command
+Usage:       pipeline                    <-- This CLI Command
 
-(Enterprise) pipeline cluster-describe  <-- Describe Model Cluster
-             pipeline cluster-logs      <-- View Cluster Logs 
-             pipeline cluster-proxy     <-- Secure Tunnel into Cluster 
-             pipeline cluster-rollback  <-- Rollback Server 
-             pipeline cluster-scale     <-- Scale Server 
-             pipeline cluster-shell     <-- Shell into Cluster
-             pipeline cluster-start     <-- Start Cluster 
-             pipeline cluster-stop      <-- Stop Model Cluster
-             pipeline cluster-upgrade   <-- Upgrade Cluster
+(Enterprise) pipeline cluster-describe   <-- Describe Model Cluster
+             pipeline cluster-logs       <-- View Cluster Logs 
+             pipeline cluster-proxy      <-- Secure Tunnel into Cluster 
+             pipeline cluster-quarantine <-- Remove Instance from Cluster for Forensics
+             pipeline cluster-rollback   <-- Rollback Cluster
+             pipeline cluster-route      <-- Route Traffic across Model Versions (ie. Canary)
+             pipeline cluster-scale      <-- Scale Cluster
+             pipeline cluster-shell      <-- Shell into Cluster
+             pipeline cluster-start      <-- Start Cluster 
+             pipeline cluster-stop       <-- Stop Model Cluster
+             pipeline cluster-upgrade    <-- Upgrade Cluster
 
-(Standalone) pipeline optimize-model    <-- Optimize Model for Predicting
+(Standalone) pipeline optimize-model     <-- Optimize Model for Predicting
 
-(Community)  pipeline predict-model     <-- Predict with Model Prediction URL
-             pipeline server-build      <-- Build Model Server
-             pipeline server-logs       <-- View Server Logs
-             pipeline server-shell      <-- Shell into Server
-             pipeline server-start      <-- Start Model Server
-             pipeline server-stop       <-- Stop Model Server
+(Community)  pipeline predict-model      <-- Predict with Model Prediction URL
+             pipeline server-build       <-- Build Model Server
+             pipeline server-logs        <-- View Server Logs
+             pipeline server-shell       <-- Shell into Server
+             pipeline server-start       <-- Start Model Server
+             pipeline server-stop        <-- Stop Model Server
 
-(Standalone) pipeline train-model       <-- Train Model
+(Standalone) pipeline train-model        <-- Train Model
 
-             pipeline version           <-- View Version
+(Community)  pipeline version            <-- View CLI Version
 ```
 
 # Prepare Model Samples

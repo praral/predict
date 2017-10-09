@@ -79,13 +79,7 @@ cd predict
 ```
 
 # Model Predictions
-## Build Example Model into Docker Image
-```
-pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=master --model-path=./models/tensorflow/mnist
-```
-_Note: `model-path` must be a relative path._
-
-**Inspect Model Directory**
+## Inspect Model Directory
 ```
 ls -l ./models/tensorflow/mnist
 
@@ -96,14 +90,23 @@ pipeline_predict.py <-- Required.  `predict(request: bytes) -> bytes` is the onl
 versions/ <-- Optional.  If directory exists, we start TensorFlow Serving in this directory.
 ```
 
-**Inspect `pipeline_predict.py`**
+## Inspect `./models/tensorflow/mnist/pipeline_predict.py`
 ```
+cat ./models/tensorflow/mnist/pipeline_predict.py
+
+### EXPECTED OUTPUT ###
 import os
 import logging
 from pipeline_model import TensorFlowServingModel
 from pipeline_logger.kafka_handler import KafkaHandler
 from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log
+
+...
+
+__all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
+
+...
 
 def _initialize_upon_import() -> TensorFlowServingModel:  <-- Optional.  Called once upon server startup.
     return TensorFlowServingModel(host='localhost',       <-- Optional.  Used only for TensorFlow Serving.
@@ -114,8 +117,6 @@ def _initialize_upon_import() -> TensorFlowServingModel:  <-- Optional.  Called 
                                   timeout=100)
 
 _model = _initialize_upon_import()  <-- Optional.  Called once upon server startup. 
-
-__all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
 
 _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'], <-- Optional.  Tag metrics.
            'model_name': os.environ['PIPELINE_MODEL_NAME'],
@@ -132,15 +133,22 @@ _logger.addHandler(_logger_kafka_handler)
 def predict(request: bytes) -> bytes: <-- Required.  Called on every prediction.
 
     with monitor(labels=_labels, name="transform_request"):   <-- Optional.  Expose fine-grained metrics.
-        transformed_request = _transform_request(request)
+        transformed_request = _transform_request(request)     <-- Optional.  Transform input (json) into TensorFlow (tensor).
 
     with monitor(labels=_labels, name="predict"):
-        predictions = _model.predict(transformed_request)
+        predictions = _model.predict(transformed_request)     <-- Optional.  Call predict() function.
 
     with monitor(labels=_labels, name="transform_response"):
-        return _transform_response(predictions)
+        return _transform_response(predictions)               <-- Optional.  Transform TensorFlow (tensor) into output (json).
 ...
 ```
+
+## Build Example Model into Docker Image
+```
+pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=master --model-path=./models/tensorflow/mnist
+```
+_Note: `model-path` must be a relative path._
+
 
 ## Start the Model Server
 ```
@@ -153,10 +161,11 @@ Wait for the model runtime to settle...
 ```
 pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=master
 ```
+_Note:  You need to `ctrl-c` out of the log viewing before proceeding._
 
 ## PipelineAI Prediction CLI
 ### Perform 100 Predictions in Parallel
-_Note:  The first call takes 10-20x longer than subsequent calls due to lazy initialization and warm-up._
+_Note:  The first call takes 10-20x longer than subsequent calls (and may timeout) due to lazy initialization and warm-up._
 ```
 pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=master --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
@@ -184,7 +193,7 @@ pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=ma
 ```
 
 ## PipelineAI Prediction REST API
-POST a JSON version of the number 2.
+Use the REST API to POST a JSON document representing the number 2.
 
 ![MNIST 2](http://pipeline.ai/assets/img/mnist-2-100x101.png)
 

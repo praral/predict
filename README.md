@@ -41,32 +41,31 @@ pipeline
 
 ### EXPECTED OUTPUT ###
 Usage:       pipeline                   <-- This CLI Command
-             pipeline cluster-describe  <-- Describe Cluster (Enterprise-Only)
-             pipeline cluster-logs      
-             pipeline cluster-nodes     
-             pipeline cluster-proxy
-             pipeline cluster-resources
-             pipeline cluster-rollback  <-- Rollback Server (Enterprise-Only)            
-             pipeline cluster-scale     <-- Scale Server (Enterprise-Only)
-             pipeline cluster-shell
-             pipeline cluster-start
-             pipeline cluster-status
-             pipeline cluster-stop
-             pipeline cluster-upgrade   <-- Upgrade Server (Enterprise-Only)
-             pipeline cluster-volumes
-             pipeline optimize-model    <-- Optimize Model for Predicting (Standalone + Enterprise)
-             pipeline predict-model     <-- Predict Against Model Server or Cluster
-             pipeline server-build      <-- Build Model Server (Community)
-             pipeline server-logs       <-- Show Model Server Logs (Community)
-             pipeline server-pull
-             pipeline server-push
-             pipeline server-shell
-             pipeline server-start
-             pipeline server-stop
-             pipeline train-model
-             pipeline version
-```
 
+             pipeline cluster-describe  <-- Describe Model Cluster (Enterprise)
+             pipeline cluster-logs      <-- View Cluster Logs 
+             pipeline cluster-proxy     <-- Secure Tunnel into Cluster 
+             pipeline cluster-rollback  <-- Rollback Server 
+             pipeline cluster-scale     <-- Scale Server 
+             pipeline cluster-shell     <-- Shell into Cluster
+             pipeline cluster-start     <-- Start Cluster 
+             pipeline cluster-stop      <-- Stop Model Cluster
+             pipeline cluster-upgrade   <-- Upgrade Cluster
+
+             pipeline optimize-model    <-- Optimize Model for Predicting (Standalone + Enterprise)
+
+             pipeline predict-model     <-- Predict with Model Prediction URL (Community)
+
+             pipeline server-build      <-- Build Model Server (Community)
+             pipeline server-logs       <-- View Server Logs
+             pipeline server-shell      <-- Shell into Server
+             pipeline server-start      <-- Start Model Server
+             pipeline server-stop       <-- Stop Model Server
+
+             pipeline train-model       <-- Train Model (Standalone + Enterprise)
+
+             pipeline version           <-- View Version
+```
 
 # Prepare Model Samples
 ## Clone the PipelineAI Models Repo
@@ -270,4 +269,3 @@ Click [HERE](http://pipeline.ai/products) to compare PipelineAI Products.
 
 ## Continuously Fix Borderline Predictions through Crowd Sourcing 
 ![Borderline Prediction Fixing and Crowd Sourcing](http://pipeline.ai/assets/img/fix-slack.png)
-

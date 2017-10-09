@@ -1,0 +1,10 @@
+*-deploy.yaml
+*-svc.yaml
+*-autoscale.yaml
+target/
+*.tar.gz
+/eclipse-generated/
+generated-*
+object-detection-mod/
+.DS_Store
+/__pycache__/

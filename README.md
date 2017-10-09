@@ -30,8 +30,44 @@ pipeline version
 
 ### EXPECTED OUTPUT ###
 cli_version: 1.2.33
-...
+api_version: v1
+capabilities_enabled: ['predict', 'server', 'version']
+capabilities_disabled: ['train', 'cluster', 'optimize']
 ```
+
+## Review CLI Functionality
+```
+pipeline
+
+### EXPECTED OUTPUT ###
+Usage:       pipeline                   <-- This CLI Command
+             pipeline cluster-describe  <-- Describe Cluster (Enterprise-Only)
+             pipeline cluster-logs      
+             pipeline cluster-nodes     
+             pipeline cluster-proxy
+             pipeline cluster-resources
+             pipeline cluster-rollback  <-- Rollback Server (Enterprise-Only)            
+             pipeline cluster-scale     <-- Scale Server (Enterprise-Only)
+             pipeline cluster-shell
+             pipeline cluster-start
+             pipeline cluster-status
+             pipeline cluster-stop
+             pipeline cluster-upgrade   <-- Upgrade Server (Enterprise-Only)
+             pipeline cluster-volumes
+             pipeline optimize-model    <-- Optimize Model for Predicting (Standalone + Enterprise)
+             pipeline predict-model     <-- Predict Against Model Server or Cluster
+             pipeline server-build      <-- Build Model Server (Community)
+             pipeline server-logs       <-- Show Model Server Logs (Community)
+             pipeline server-pull
+             pipeline server-push
+             pipeline server-shell
+             pipeline server-start
+             pipeline server-stop
+             pipeline train-model
+             pipeline version
+```
+
+
 # Prepare Model Samples
 ## Clone the PipelineAI Models Repo
 ```

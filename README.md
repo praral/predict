@@ -84,9 +84,9 @@ ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml <-- Required.  Sets up the conda environment.
-pipeline_install.sh <-- Optional.  If file exists, we run it.
-pipeline_predict.py <-- Required.  `predict(request: bytes) -> bytes` is the only function required.
-versions/ <-- Optional.  If directory exists, we start TensorFlow Serving in this directory.
+pipeline_install.sh            <-- Optional.  If file exists, we run it.
+pipeline_predict.py            <-- Required.  `predict(request: bytes) -> bytes` is required.
+versions/                      <-- Optional.  If directory exists, we start TensorFlow Serving.
 ```
 
 ## Inspect `./models/tensorflow/mnist/pipeline_predict.py`
@@ -107,8 +107,8 @@ __all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
 
 ...
 
-def _initialize_upon_import() -> TensorFlowServingModel:  <-- Optional.  Called once upon server startup.
-    return TensorFlowServingModel(host='localhost',       <-- Optional.  Used only for TensorFlow Serving.
+def _initialize_upon_import() -> TensorFlowServingModel:    <-- Optional.  Called once upon server startup.
+    return TensorFlowServingModel(host='localhost',         <-- Optional.  TensorFlow Serving.
                                   port=9000,
                                   model_name='mnist',
                                   inputs_name='inputs',
@@ -121,15 +121,15 @@ _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'], <-- Optional.  Tag m
            'model_name': os.environ['PIPELINE_MODEL_NAME'],
            'model_tag': os.environ['PIPELINE_MODEL_TAG']}
 
-_logger = logging.getLogger('predict-logger')  <-- Optional.  Used for standard Python logging.
+_logger = logging.getLogger('predict-logger')               <-- Optional.  Standard Python logging.
 
 _logger_kafka_handler = KafkaHandler(host_list='localhost:9092', <-- Optional.  Expose prediction stream.
                                      topic='predictions')
 
 _logger.addHandler(_logger_kafka_handler)
 
-@log(labels=_labels, logger=_logger) <-- Optional.  Used for prediction sampling and comparing.
-def predict(request: bytes) -> bytes: <-- Required.  Called on every prediction.
+@log(labels=_labels, logger=_logger)                          <-- Optional.  Sample and compare predictions.
+def predict(request: bytes) -> bytes:                         <-- Required.  Called on every prediction.
 
     with monitor(labels=_labels, name="transform_request"):   <-- Optional.  Expose fine-grained metrics.
         transformed_request = _transform_request(request)     <-- Optional.  Transform input (json) into TensorFlow (tensor).

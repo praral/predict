@@ -21,7 +21,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.2.34 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.2.36 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -29,7 +29,7 @@ pip install cli-pipeline==1.2.34 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.2.34
+cli_version: 1.2.36
 api_version: v1
 capabilities_enabled: ['predict', 'server', 'version']
 capabilities_disabled: ['train', 'cluster', 'optimize']
@@ -40,31 +40,32 @@ capabilities_disabled: ['train', 'cluster', 'optimize']
 pipeline
 
 ### EXPECTED OUTPUT ###
-Usage:       pipeline                   <-- This CLI Command
+Usage:       pipeline                    <-- This CLI Command
 
-             pipeline cluster-describe  <-- Describe Model Cluster (Enterprise)
-             pipeline cluster-logs      <-- View Cluster Logs 
-             pipeline cluster-proxy     <-- Secure Tunnel into Cluster 
-             pipeline cluster-rollback  <-- Rollback Server 
-             pipeline cluster-scale     <-- Scale Server 
-             pipeline cluster-shell     <-- Shell into Cluster
-             pipeline cluster-start     <-- Start Cluster 
-             pipeline cluster-stop      <-- Stop Model Cluster
-             pipeline cluster-upgrade   <-- Upgrade Cluster
+(Enterprise) pipeline cluster-describe   <-- Describe Model Cluster
+             pipeline cluster-logs       <-- View Cluster Logs 
+             pipeline cluster-proxy      <-- Secure Tunnel into Cluster 
+             pipeline cluster-quarantine <-- Remove Instance from Cluster for Forensics
+             pipeline cluster-rollback   <-- Rollback Cluster
+             pipeline cluster-route      <-- Route Traffic across Model Versions (ie. Canary)
+             pipeline cluster-scale      <-- Scale Cluster
+             pipeline cluster-shell      <-- Shell into Cluster
+             pipeline cluster-start      <-- Start Cluster 
+             pipeline cluster-stop       <-- Stop Model Cluster
+             pipeline cluster-upgrade    <-- Upgrade Cluster
 
-             pipeline optimize-model    <-- Optimize Model for Predicting (Standalone + Enterprise)
+(Standalone) pipeline optimize-model     <-- Optimize Model for Predicting
 
-             pipeline predict-model     <-- Predict with Model Prediction URL (Community)
+(Community)  pipeline predict-model      <-- Predict with Model Prediction URL
+             pipeline server-build       <-- Build Model Server
+             pipeline server-logs        <-- View Server Logs
+             pipeline server-shell       <-- Shell into Server
+             pipeline server-start       <-- Start Model Server
+             pipeline server-stop        <-- Stop Model Server
 
-             pipeline server-build      <-- Build Model Server (Community)
-             pipeline server-logs       <-- View Server Logs
-             pipeline server-shell      <-- Shell into Server
-             pipeline server-start      <-- Start Model Server
-             pipeline server-stop       <-- Stop Model Server
+(Standalone) pipeline train-model        <-- Train Model
 
-             pipeline train-model       <-- Train Model (Standalone + Enterprise)
-
-             pipeline version           <-- View Version
+(Community)  pipeline version            <-- View CLI Version
 ```
 
 # Prepare Model Samples
@@ -79,25 +80,22 @@ cd predict
 ```
 
 # Model Predictions
-## Build Example Model into Docker Image
-```
-pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=master --model-path=./models/tensorflow/mnist
-```
-_Note: `model-path` must be a relative path._
-
-**Inspect Model Directory**
+## Inspect Model Directory
 ```
 ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml <-- Required.  Sets up the conda environment.
-pipeline_install.sh <-- Optional.  If file exists, we run it.
-pipeline_predict.py <-- Required.  `predict(request: bytes) -> bytes` is the only function required.
-versions/ <-- Optional.  If directory exists, we start TensorFlow Serving in this directory.
+pipeline_install.sh            <-- Optional.  If file exists, we run it.
+pipeline_predict.py            <-- Required.  `predict(request: bytes) -> bytes` is required.
+versions/                      <-- Optional.  If directory exists, we start TensorFlow Serving.
 ```
 
-**Inspect `pipeline_predict.py`**
+## Inspect `./models/tensorflow/mnist/pipeline_predict.py`
 ```
+cat ./models/tensorflow/mnist/pipeline_predict.py
+
+### EXPECTED OUTPUT ###
 import os
 import logging
 from pipeline_model import TensorFlowServingModel
@@ -105,8 +103,14 @@ from pipeline_logger.kafka_handler import KafkaHandler
 from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log
 
-def _initialize_upon_import() -> TensorFlowServingModel:  <-- Optional.  Called once upon server startup.
-    return TensorFlowServingModel(host='localhost',       <-- Optional.  Used only for TensorFlow Serving.
+...
+
+__all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
+
+...
+
+def _initialize_upon_import() -> TensorFlowServingModel:    <-- Optional.  Called once upon server startup.
+    return TensorFlowServingModel(host='localhost',         <-- Optional.  TensorFlow Serving.
                                   port=9000,
                                   model_name='mnist',
                                   inputs_name='inputs',
@@ -115,48 +119,53 @@ def _initialize_upon_import() -> TensorFlowServingModel:  <-- Optional.  Called 
 
 _model = _initialize_upon_import()  <-- Optional.  Called once upon server startup. 
 
-__all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
-
 _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'], <-- Optional.  Tag metrics.
            'model_name': os.environ['PIPELINE_MODEL_NAME'],
            'model_tag': os.environ['PIPELINE_MODEL_TAG']}
 
-_logger = logging.getLogger('predict-logger')  <-- Optional.  Used for standard Python logging.
+_logger = logging.getLogger('predict-logger')               <-- Optional.  Standard Python logging.
 
 _logger_kafka_handler = KafkaHandler(host_list='localhost:9092', <-- Optional.  Expose prediction stream.
                                      topic='predictions')
 
 _logger.addHandler(_logger_kafka_handler)
 
-@log(labels=_labels, logger=_logger) <-- Optional.  Used for prediction sampling and comparing.
-def predict(request: bytes) -> bytes: <-- Required.  Called on every prediction.
+@log(labels=_labels, logger=_logger)                          <-- Optional.  Sample and compare predictions.
+def predict(request: bytes) -> bytes:                         <-- Required.  Called on every prediction.
 
     with monitor(labels=_labels, name="transform_request"):   <-- Optional.  Expose fine-grained metrics.
-        transformed_request = _transform_request(request)
+        transformed_request = _transform_request(request)     <-- Optional.  Transform input (json) into TensorFlow (tensor).
 
     with monitor(labels=_labels, name="predict"):
-        predictions = _model.predict(transformed_request)
+        predictions = _model.predict(transformed_request)     <-- Optional.  Call predict() function.
 
     with monitor(labels=_labels, name="transform_response"):
-        return _transform_response(predictions)
+        return _transform_response(predictions)               <-- Optional.  Transform TensorFlow (tensor) into output (json).
 ...
 ```
+
+## Build Example Model into Docker Image
+```
+pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=master --model-path=./models/tensorflow/mnist
+```
+_`model-path` must be a relative path._
 
 ## Start the Model Server
 ```
 pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=master --memory-limit=4G
 ```
-_Note:  If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
+_If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
 
 ## Monitor Runtime Logs
 Wait for the model runtime to settle...
 ```
 pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=master
 ```
+_You need to `ctrl-c` out of the log viewing before proceeding._
 
 ## PipelineAI Prediction CLI
 ### Perform 100 Predictions in Parallel
-_Note:  The first call takes 10-20x longer than subsequent calls due to lazy initialization and warm-up._
+_The first call takes 10-20x longer than subsequent calls (and may timeout) due to lazy initialization and warm-up._
 ```
 pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=master --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
@@ -168,7 +177,7 @@ Digit  Confidence
 =====  ==========
 0      0.0022526539396494627
 1      2.63791100074684e-10
-2      0.4638307988643646
+2      0.4638307988643646      <-- Prediction
 3      0.21909376978874207
 4      3.2985670372909226e-07
 5      0.29357224702835083 
@@ -184,7 +193,7 @@ pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=ma
 ```
 
 ## PipelineAI Prediction REST API
-POST a JSON version of the number 2.
+Use the REST API to POST a JSON document representing the number 2.
 
 ![MNIST 2](http://pipeline.ai/assets/img/mnist-2-100x101.png)
 
@@ -202,7 +211,7 @@ Digit  Confidence
 =====  ==========
 0      0.0022526539396494627
 1      2.63791100074684e-10
-2      0.4638307988643646
+2      0.4638307988643646      <-- Prediction
 3      0.21909376978874207
 4      3.2985670372909226e-07
 5      0.29357224702835083 
@@ -236,6 +245,8 @@ http://localhost:3000/
 _Username/Password: **admin**/**admin**_
 
 _Use `http://localhost:9090` for the Prometheus data source within your Grafana Dashboard._
+
+_Import [THIS](https://github.com/PipelineAI/predict/blob/master/dashboard/grafana/pipeline-predict.json) json file for your PipelineAI Prediction dashboard._
 
 _Create PipelineAI Prediction Dashboards based on [THIS](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations) link._
 

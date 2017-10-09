@@ -42,7 +42,7 @@ pipeline
 ### EXPECTED OUTPUT ###
 Usage:       pipeline                   <-- This CLI Command
 
-             pipeline cluster-describe  <-- Describe Model Cluster (Enterprise)
+(Enterprise) pipeline cluster-describe  <-- Describe Model Cluster
              pipeline cluster-logs      <-- View Cluster Logs 
              pipeline cluster-proxy     <-- Secure Tunnel into Cluster 
              pipeline cluster-rollback  <-- Rollback Server 
@@ -52,17 +52,16 @@ Usage:       pipeline                   <-- This CLI Command
              pipeline cluster-stop      <-- Stop Model Cluster
              pipeline cluster-upgrade   <-- Upgrade Cluster
 
-             pipeline optimize-model    <-- Optimize Model for Predicting (Standalone + Enterprise)
+(Standalone) pipeline optimize-model    <-- Optimize Model for Predicting
 
-             pipeline predict-model     <-- Predict with Model Prediction URL (Community)
-
-             pipeline server-build      <-- Build Model Server (Community)
+(Community)  pipeline predict-model     <-- Predict with Model Prediction URL
+             pipeline server-build      <-- Build Model Server
              pipeline server-logs       <-- View Server Logs
              pipeline server-shell      <-- Shell into Server
              pipeline server-start      <-- Start Model Server
              pipeline server-stop       <-- Stop Model Server
 
-             pipeline train-model       <-- Train Model (Standalone + Enterprise)
+(Standalone) pipeline train-model       <-- Train Model
 
              pipeline version           <-- View Version
 ```

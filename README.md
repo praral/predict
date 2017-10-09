@@ -148,25 +148,24 @@ def predict(request: bytes) -> bytes:                         <-- Required.  Cal
 ```
 pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=master --model-path=./models/tensorflow/mnist
 ```
-_Note: `model-path` must be a relative path._
-
+_`model-path` must be a relative path._
 
 ## Start the Model Server
 ```
 pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=master --memory-limit=4G
 ```
-_Note:  If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
+_If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
 
 ## Monitor Runtime Logs
 Wait for the model runtime to settle...
 ```
 pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=master
 ```
-_Note:  You need to `ctrl-c` out of the log viewing before proceeding._
+_You need to `ctrl-c` out of the log viewing before proceeding._
 
 ## PipelineAI Prediction CLI
 ### Perform 100 Predictions in Parallel
-_Note:  The first call takes 10-20x longer than subsequent calls (and may timeout) due to lazy initialization and warm-up._
+_The first call takes 10-20x longer than subsequent calls (and may timeout) due to lazy initialization and warm-up._
 ```
 pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=master --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
@@ -246,6 +245,8 @@ http://localhost:3000/
 _Username/Password: **admin**/**admin**_
 
 _Use `http://localhost:9090` for the Prometheus data source within your Grafana Dashboard._
+
+_Import [THIS](https://github.com/PipelineAI/predict/blob/master/dashboard/grafana/pipeline-predict.json) json file for your PipelineAI Prediction dashboard._
 
 _Create PipelineAI Prediction Dashboards based on [THIS](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations) link._
 

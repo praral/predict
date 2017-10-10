@@ -4,6 +4,9 @@
 
 ## Push Docker Image to Docker Registry
 ```
+docker images
+```
+```
 docker push <image-name>
 ```
 

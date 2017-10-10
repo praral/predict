@@ -2,7 +2,10 @@
 
 ## [Build and Test](https://github.com/PipelineAI/predict) Your Model as a Docker Image
 
-## [Push](https://github.com/PipelineAI/predict) Docker Image to Docker Registry
+## Push Docker Image to Docker Registry
+```
+docker push <image-name>
+```
 
 ## Setup ECS Cluster through AWS CLI 
 Configure Docker Image, RAM, and CPU

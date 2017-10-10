@@ -277,7 +277,7 @@ _Click `Save & Test`_.
 
 _Click `Dashboards -> Import` upper-left menu drop-down_.
 
-_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/r1.3/dashboard/grafana/pipeline-predict.json) raw json file into the `paste JSON` box_.
+_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/r1.3/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
 
 _Select the Prometheus-based data source that you setup above and click `Import`_.
 
@@ -285,7 +285,7 @@ _Create additional PipelineAI Prediction widgets using [THIS](https://prometheus
 
 ## Stop Model Server
 ```
-pipeline predict-stop --model-type=tensorflow --model-name=mnist --model-tag=v1.3.0
+pipeline server-stop --model-type=tensorflow --model-name=mnist --model-tag=v1.3.0
 ```
 
 # [PipelineAI Standalone and Enterprise Features](http://pipeline.ai/features)

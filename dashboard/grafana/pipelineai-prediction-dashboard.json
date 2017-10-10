@@ -38,7 +38,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
-  "refresh": "5s",
+  "refresh": false,
   "rows": [
     {
       "collapse": false,
@@ -168,27 +168,29 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": " rate(transform_request_summary_sum[1m])\n/\n  rate(transform_request_summary_sum[1m])",
+              "expr": " rate(transform_request_summary_sum[1m])\n/\n  rate(transform_request_summary_count[1m])",
               "format": "time_series",
               "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "transform_request",
+              "legendFormat": "{{ model_type }}-{{ model_name }}-{{ model_tag }}--transform_request",
               "refId": "A",
               "step": 2
             },
             {
-              "expr": " rate(predict_summary_sum[1m])\n/\n  rate(predict_summary_sum[1m])",
+              "expr": " rate(predict_summary_sum[1m])\n/\n  rate(predict_summary_count[1m])",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "predict",
+              "legendFormat": "{{ model_type }}-{{ model_name }}-{{ model_tag }}--predict",
               "refId": "B",
               "step": 2
             },
             {
-              "expr": " rate(transform_response_summary_sum[1m])\n/\n  rate(transform_response_summary_sum[1m])",
+              "expr": " rate(transform_response_summary_sum[1m])\n/\n  rate(transform_response_summary_count[1m])",
               "format": "time_series",
+              "interval": "",
               "intervalFactor": 2,
-              "legendFormat": "transform_response",
+              "legendFormat": "{{ model_type }}-{{ model_name }}-{{ model_tag }}--transform_response",
               "refId": "C",
               "step": 2
             }
@@ -245,8 +247,8 @@
     "list": []
   },
   "time": {
-    "from": "now-1m",
-    "to": "now"
+    "from": "2017-10-10T04:12:58.625Z",
+    "to": "2017-10-10T04:14:58.625Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -275,5 +277,5 @@
   },
   "timezone": "",
   "title": "PipelineAI Prediction Dashboard",
-  "version": 1
+  "version": 2
 }

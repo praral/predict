@@ -7,8 +7,8 @@
 ## Setup ECS Cluster through AWS CLI 
 Configure Docker Image, RAM, and CPU
 
-![AWS ECS Task Definition](http://pipeline/assets/img/predict-aws-ecs-task-definition.png) 
+![AWS ECS Task Definition](http://pipeline.ai/assets/img/predict-aws-ecs-task-definition.png) 
 
 Configure Ports and Environment Variables
 
-![AWS ECS Task Definition Details](http://pipeline/assets/img/predict-aws-ecs-task-definition-details.png)
+![AWS ECS Task Definition Details](http://pipeline.ai/assets/img/predict-aws-ecs-task-definition-details.png)

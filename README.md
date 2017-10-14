@@ -1,4 +1,4 @@
-# [PipelineAI](http://pipeline.ai) Core Features
+# PipelineAI Core [Features](http://pipeline.ai)
 ## Consistent, Immutable, Reproducible Model Runtimes
 ![Consistent Model Environments](http://pipeline.ai/assets/img/docker-gobbles-ml.png)
 
@@ -7,7 +7,6 @@ Every Model is burned into a separate Docker Image with its appropriate Python, 
 We use this same Docker Image from Local Laptop to Production.
 
 ## Supported Model Types 
-
 [scikit](https://github.com/PipelineAI/predict/tree/r1.3/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/r1.3/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [keras](https://github.com/PipelineAI/predict/tree/r1.3/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/r1.3/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/r1.3/models/spark/), [java](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/r1.3/models/xgboost/), R
 
 More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
@@ -317,8 +316,15 @@ Click [HERE](http://pipeline.ai/products) to compare PipelineAI Products.
 ## Continuously Fix Borderline Predictions through Crowd Sourcing 
 ![Borderline Prediction Fixing and Crowd Sourcing](http://pipeline.ai/assets/img/fix-slack.png)
 
-# 24x7 Support
-Click [HERE](https://support.pipeline.ai/) for support.
+# Useful PipelineAI Resources
+Click [HERE](https://github.com/PipelineAI/predict) for more info on PipelineAI Predict.
 
-# PipelineAI Workshops
-[TensorFlow + Spark + GPU](https://www.eventbrite.com/d/worldwide/pipelineai/?mode=search)
+Click [HERE](https://github.com/PipelineAI/pipeline/wiki/) for more info on PipelineAI + Kubernetes.
+
+Click [HERE](https://support.pipeline.ai/) for 24x7 PipelineAI Support.
+
+Click [HERE](https://www.eventbrite.com/d/worldwide/pipelineai/?mode=search) for our TensorFlow, Spark, and GPU workshops.
+
+Click [HERE](https://github.com/PipelineAI/pipeline/wiki/AWS-GPU-TensorFlow-Docker) to setup AWS + GPUs.
+
+Click [HERE](https://github.com/PipelineAI/pipeline/wiki/GCP-GPU-TensorFlow-Docker) to setup Google Cloud + GPUs.

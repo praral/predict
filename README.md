@@ -41,7 +41,7 @@ pipeline version
 cli_version: 1.3.2
 api_version: v1
 capabilities_enabled: ['predict', 'server', 'version']
-capabilities_disabled: ['train', 'cluster', 'optimize']
+capabilities_disabled: ['train', 'cluster', 'optimize'] <-- Contact help@pipeline.ai to enable these.
 ```
 
 ## Review CLI Functionality

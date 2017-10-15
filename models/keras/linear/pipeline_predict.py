@@ -10,17 +10,12 @@ import logging
 from keras_theano_model import KerasTheanoModel
 from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log
-from pipeline_logger.kafka_handler import KafkaHandler
 
 _logger = logging.getLogger('model_logger')
 _logger.setLevel(logging.INFO)
 _logger_stream_handler = logging.StreamHandler()
 _logger_stream_handler.setLevel(logging.INFO)
 _logger.addHandler(_logger_stream_handler)
-
-_logger_kafka_handler = KafkaHandler(host_list='localhost:9092',
-                                     topic='predictions')
-_logger.addHandler(_logger_kafka_handler)
 
 
 __all__ = ['predict']
@@ -38,8 +33,7 @@ def _initialize_upon_import(model_state_path: str) -> KerasTheanoModel:
 
 
 # This is called unconditionally at *module import time*...
-_model = _initialize_upon_import(os.path.join('state/keras_theano_linear_model_state.h5'))
-
+_model = _initialize_upon_import(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'state/keras_theano_linear_model_state.h5'))
 
 @monitor(labels=_labels, name="transform_request")
 def _json_to_numpy(request: bytes) -> np.array:

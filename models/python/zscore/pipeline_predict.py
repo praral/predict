@@ -19,15 +19,13 @@ _logger.addHandler(_logger_stream_handler)
 __all__ = ['predict']
 
 
-# Performance monitors, a-la prometheus...
-_labels= {'model_type':'python',
-                  'model_name':'zscore'}
+_labels= {'model_type': os.environ['PIPELINE_MODEL_TYPE'],
+          'model_name': os.environ['PIPELINE_MODEL_NAME'],
+          'model_tag': os.environ['PIPELINE_MODEL_TAG']}
 
 
 def _initialize_upon_import():
-    ''' Initialize / Restore Model Object.
-    '''
-    model_pkl_path = 'model.pkl'
+    model_pkl_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'model.pkl')
 
     # Load pickled model from model directory
     with open(model_pkl_path, 'rb') as fh:
@@ -83,8 +81,7 @@ def _predict(inputs: dict) -> bytes:
 
 
 @monitor(labels=_labels, name="transform_request")
-def _transform_request(self,
-                      request):
+def _transform_request(request):
     request_str = request.decode('utf-8')
     request_str = request_str.strip().replace('\n', ',')
     request_dict = json.loads(request_str)
@@ -92,7 +89,6 @@ def _transform_request(self,
 
 
 @monitor(labels=_labels, name="transform_response")
-def _transform_response(self,
-                       response):
+def _transform_response(response):
     response_json = json.dumps(response)
     return response_json

@@ -1,10 +1,17 @@
-# PipelineAI Core [Features](http://pipeline.ai)
+# PipelineAI [Home](http://pipeline.ai)
+![PipelineAI Home](http://pipeline.ai/assets/img/pipelineai-home.png)
+
+# PipelineAI [Products](http://pipeline.ai/products/)
+[Community Edition](http://pipeline.ai/products/), [Standalone Edition](http://pipeline.ai/products/), [Enterprise Edition](http://pipeline.ai/products/)
+
+# PipelineAI Core [Features](http://pipeline.ai/features)
+
 ## Consistent, Immutable, Reproducible Model Runtimes
 ![Consistent Model Environments](http://pipeline.ai/assets/img/docker-gobbles-ml.png)
 
-Every Model is burned into a separate Docker Image with its appropriate Python, C++, and Java/Scala Runtime Libraries.  
+Each model is built into a separate Docker image with the appropriate Python, C++, and Java/Scala Runtime Libraries for training or prediction.
 
-We use this same Docker Image from Local Laptop to Production.
+Use the same Docker Image from Local Laptop to Production to avoid dependency surprises.
 
 ## Supported Model Types 
 [scikit](https://github.com/PipelineAI/predict/tree/r1.3/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/r1.3/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [keras](https://github.com/PipelineAI/predict/tree/r1.3/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/r1.3/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/r1.3/models/spark/), [java](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/r1.3/models/xgboost/), R
@@ -40,7 +47,7 @@ pipeline version
 cli_version: 1.3.2
 api_version: v1
 capabilities_enabled: ['predict', 'server', 'version']
-capabilities_disabled: ['train', 'cluster', 'optimize'] <-- Contact help@pipeline.ai to enable these.
+capabilities_disabled: ['train', 'cluster', 'optimize']
 ```
 
 ## Review CLI Functionality

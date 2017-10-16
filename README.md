@@ -1,10 +1,17 @@
-# PipelineAI Core [Features](http://pipeline.ai)
+# PipelineAI [Home](http://pipeline.ai)
+![PipelineAI Home](http://pipeline.ai/assets/img/pipelineai-home.png)
+
+# PipelineAI [Products](http://pipeline.ai/products/)
+[Community Edition](http://pipeline.ai/products/), [Standalone Edition](http://pipeline.ai/products/), [Enterprise Edition](http://pipeline.ai/products/)
+
+# PipelineAI Core [Features](http://pipeline.ai/features)
+
 ## Consistent, Immutable, Reproducible Model Runtimes
 ![Consistent Model Environments](http://pipeline.ai/assets/img/docker-gobbles-ml.png)
 
-Every Model is burned into a separate Docker Image with its appropriate Python, C++, and Java/Scala Runtime Libraries.  
+Each model is built into a separate Docker image with the appropriate Python, C++, and Java/Scala Runtime Libraries for training or prediction.
 
-We use this same Docker Image from Local Laptop to Production.
+Use the same Docker Image from Local Laptop to Production to avoid dependency surprises.
 
 ## Supported Model Types 
 [scikit](https://github.com/PipelineAI/predict/tree/r1.3/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/r1.3/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [keras](https://github.com/PipelineAI/predict/tree/r1.3/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/r1.3/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/r1.3/models/spark/), [java](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/r1.3/models/xgboost/), R
@@ -40,7 +47,7 @@ pipeline version
 cli_version: 1.3.2
 api_version: v1
 capabilities_enabled: ['predict', 'server', 'version']
-capabilities_disabled: ['train', 'cluster', 'optimize'] <-- Contact help@pipeline.ai to enable these.
+capabilities_disabled: ['train', 'cluster', 'optimize']
 ```
 
 ## Review CLI Functionality
@@ -108,7 +115,6 @@ cat ./models/tensorflow/mnist/pipeline_predict.py
 import os
 import logging
 from pipeline_model import TensorFlowServingModel
-from pipeline_logger.kafka_handler import KafkaHandler
 from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log
 
@@ -133,11 +139,6 @@ _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'], <-- Optional.  Tag m
            'model_tag': os.environ['PIPELINE_MODEL_TAG']}
 
 _logger = logging.getLogger('predict-logger')               <-- Optional.  Standard Python logging.
-
-_logger_kafka_handler = KafkaHandler(host_list='localhost:9092', <-- Optional.  Expose prediction stream.
-                                     topic='predictions')
-
-_logger.addHandler(_logger_kafka_handler)
 
 @log(labels=_labels, logger=_logger)                          <-- Optional.  Sample and compare predictions.
 def predict(request: bytes) -> bytes:                         <-- Required.  Called on every prediction.
@@ -175,7 +176,6 @@ pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=v1.3
 2017-10-10 03:56:00.695  INFO 121 --- [     run-main-0] i.p.predict.jvm.PredictionServiceMain$   : Started PredictionServiceMain. in 7.566 seconds (JVM running for 20.739)
 [debug] 	Thread run-main-0 exited.
 [debug] Waiting for thread container-0 to terminate.
-kafka is [UP]
 ...
 INFO[0050] Completed initial partial maintenance sweep through 4 in-memory fingerprints in 40.002264633s.  source="storage.go:1398"
 ...
@@ -244,13 +244,6 @@ Digit  Confidence
 9      5.426473762781825e-06
 ```
 
-## View Real-Time Prediction Stream
-Re-run the Prediction REST API while watching the following url:
-```
-http://localhost:6969/stream/kafka/
-```
-![Live Stream Predictions](http://pipeline.ai/assets/img/live-stream-predictions.png)
-
 ## Monitor Real-Time Prediction Metrics
 Re-run the Prediction REST API while watching the following dashboard URL:
 ```
@@ -304,6 +297,9 @@ Click [HERE](http://pipeline.ai/products) to compare PipelineAI Products.
 ## Continuously Deploy Models to Clusters of PipelineAI Servers
 ![PipelineAI Weavescope Kubernetes Cluster](http://pipeline.ai/assets/img/weavescope-with-header.png)
 
+## View Real-Time Prediction Stream
+![Live Stream Predictions](http://pipeline.ai/assets/img/live-stream-predictions.png)
+
 ## Compare Both Offline (Batch) and Real-Time Model Performance
 ![PipelineAI Model Comparison](http://pipeline.ai/assets/img/dashboard-batch-and-realtime.png)
 
@@ -317,7 +313,7 @@ Click [HERE](http://pipeline.ai/products) to compare PipelineAI Products.
 ![Borderline Prediction Fixing and Crowd Sourcing](http://pipeline.ai/assets/img/fix-slack.png)
 
 # Useful PipelineAI Resources
-Click [HERE](https://github.com/PipelineAI/predict) for more info on PipelineAI Predict.
+Click [HERE](https://github.com/PipelineAI/) for more info on PipelineAI Open Source.
 
 Click [HERE](https://github.com/PipelineAI/pipeline/wiki/) for more info on PipelineAI + Kubernetes.
 

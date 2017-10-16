@@ -36,7 +36,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.3.2 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.3.4 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -44,10 +44,15 @@ pip install cli-pipeline==1.3.2 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.2
+***********************************************************************
+cli_version: 1.3.4
 api_version: v1
-capabilities_enabled: ['predict', 'server', 'version']
-capabilities_disabled: ['train', 'cluster', 'optimize']
+
+capabilities_enabled: ['server', 'predict', 'version']
+capabilities_disabled: ['cluster', 'train', 'optimize']
+
+Email upgrade@pipeline.ai to unlock additional scopes and capabilities.
+***********************************************************************
 ```
 
 ## Review CLI Functionality
@@ -57,29 +62,32 @@ pipeline
 ### EXPECTED OUTPUT ###
 Usage:       pipeline                    <-- This CLI Command
 
-(Enterprise) pipeline cluster-describe   <-- Describe Model Cluster
-             pipeline cluster-logs       <-- View Cluster Logs 
-             pipeline cluster-proxy      <-- Secure Tunnel into Cluster 
-             pipeline cluster-quarantine <-- Remove Instance from Cluster for Forensics
-             pipeline cluster-rollback   <-- Rollback Cluster
-             pipeline cluster-route      <-- Route Traffic across Model Versions (ie. Canary)
+(Enterprise) pipeline cluster-describe   <-- Describe Model Server Cluster
+             pipeline cluster-logs       <-- View Model Server Cluster Logs 
+             pipeline cluster-proxy      <-- Secure Tunnel into Model Server Cluster 
+             pipeline cluster-quarantine <-- Remove Instance from Model Server Cluster (Forensics)
+             pipeline cluster-rollback   <-- Rollback Model Server Cluster
+             pipeline cluster-route      <-- Route Traffic between Model Server Cluster (Canary Release)
              pipeline cluster-scale      <-- Scale Cluster
+             pipeline cluster-shadow     <-- Duplicate Traffic to Model Server Cluster (Shadowed Canary)
              pipeline cluster-shell      <-- Shell into Cluster
              pipeline cluster-start      <-- Start Cluster 
              pipeline cluster-stop       <-- Stop Model Cluster
              pipeline cluster-upgrade    <-- Upgrade Cluster
+             pipeline cluster-train      <-- Train Model on Distributed Cluster Server
 
 (Standalone) pipeline optimize-model     <-- Optimize Model for Prediction
 
-(Community)  pipeline predict-model      <-- Predict with Model
- 
+(Community)  pipeline predict-model      <-- Predict with Model Server
+
 (Community)  pipeline server-build       <-- Build Model Server
-             pipeline server-logs        <-- View Server Logs
-             pipeline server-shell       <-- Shell into Server
+             pipeline server-logs        <-- View Model Server Logs
+             pipeline server-pull        <-- Pull from Model Server Registry (docker pull)
+             pipeline server-push        <-- Push to Model Server Registry (docker push)
+             pipeline server-shell       <-- Shell into Model Server (Forensics)
              pipeline server-start       <-- Start Model Server
              pipeline server-stop        <-- Stop Model Server
-
-(Standalone) pipeline train-model        <-- Train Model
+             pipeline server-train       <-- Train Model on Server
 
 (Community)  pipeline version            <-- View CLI Version
 ```
@@ -107,7 +115,7 @@ pipeline_predict.py            <-- Required.  `predict(request: bytes) -> bytes`
 versions/                      <-- Optional.  If directory exists, we start TensorFlow Serving.
 ```
 
-## Inspect `./models/tensorflow/mnist/pipeline_predict.py`
+## Inspect PipelineAI Predict Module `./models/tensorflow/mnist/pipeline_predict.py`
 ```
 cat ./models/tensorflow/mnist/pipeline_predict.py
 
@@ -183,7 +191,7 @@ INFO[0050] Completed initial partial maintenance sweep through 4 in-memory finge
 _You need to `ctrl-c` out of the log viewing before proceeding._
 
 ## PipelineAI Prediction CLI
-### Perform 100 Predictions in Parallel
+### Perform Prediction
 _The first call takes 10-20x longer than subsequent calls (and may timeout causing a "fallback" message) due to lazy initialization and warm-up._
 
 _Try the call again if you see a "fallback" message._

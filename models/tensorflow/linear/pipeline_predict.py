@@ -2,6 +2,7 @@ import os
 import numpy as np
 import json
 
+import logging
 from pipeline_model import TensorFlowServingModel
 from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log

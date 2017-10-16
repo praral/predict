@@ -67,14 +67,15 @@ Usage:       pipeline                    <-- This CLI Command
              pipeline cluster-proxy      <-- Secure Tunnel into Model Server Cluster 
              pipeline cluster-quarantine <-- Remove Instance from Model Server Cluster (Forensics)
              pipeline cluster-rollback   <-- Rollback Model Server Cluster
-             pipeline cluster-route      <-- Route Traffic between Model Server Cluster (Canary Release)
-             pipeline cluster-scale      <-- Scale Cluster
+             pipeline cluster-scale      <-- Scale Model Server Cluster
              pipeline cluster-shadow     <-- Duplicate Traffic to Model Server Cluster (Shadowed Canary)
-             pipeline cluster-shell      <-- Shell into Cluster
-             pipeline cluster-start      <-- Start Cluster 
-             pipeline cluster-stop       <-- Stop Model Cluster
-             pipeline cluster-upgrade    <-- Upgrade Cluster
+             pipeline cluster-shell      <-- Shell into Model Server Cluster
+             pipeline cluster-split      <-- Split Traffic within Model Server Cluster (Split Canary)
+             pipeline cluster-start      <-- Start Model Server Cluster 
+             pipeline cluster-status     <-- Describe Model Server Cluster Status
+             pipeline cluster-stop       <-- Stop Model Server Cluster
              pipeline cluster-train      <-- Train Model on Distributed Cluster Server
+             pipeline cluster-upgrade    <-- Upgrade Model Server Cluster
 
 (Standalone) pipeline optimize-model     <-- Optimize Model for Prediction
 

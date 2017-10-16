@@ -36,7 +36,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.3.4 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.3.6 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -45,7 +45,7 @@ pipeline version
 
 ### EXPECTED OUTPUT ###
 ***********************************************************************
-cli_version: 1.3.4
+cli_version: 1.3.6
 api_version: v1
 
 capabilities_enabled: ['server', 'predict', 'version']
@@ -60,41 +60,46 @@ Email upgrade@pipeline.ai to unlock additional scopes and capabilities.
 pipeline
 
 ### EXPECTED OUTPUT ###
-Usage:       pipeline                    <-- This CLI Command
+Usage:       pipeline                     <-- This List of CLI Commands
 
-(Enterprise) pipeline cluster-describe   <-- Describe Model Server Cluster
-             pipeline cluster-logs       <-- View Model Server Cluster Logs 
-             pipeline cluster-proxy      <-- Secure Tunnel into Model Server Cluster 
-             pipeline cluster-quarantine <-- Remove Instance from Model Server Cluster (Forensics)
-             pipeline cluster-rollback   <-- Rollback Model Server Cluster
-             pipeline cluster-scale      <-- Scale Model Server Cluster
-             pipeline cluster-shadow     <-- Duplicate Traffic to Model Server Cluster (Shadowed Canary)
-             pipeline cluster-shell      <-- Shell into Model Server Cluster
-             pipeline cluster-split      <-- Split Traffic within Model Server Cluster (Split Canary)
-             pipeline cluster-start      <-- Start Model Server Cluster 
-             pipeline cluster-status     <-- Describe Model Server Cluster Status
-             pipeline cluster-stop       <-- Stop Model Server Cluster
-             pipeline cluster-train      <-- Train Model on Distributed Cluster Server
-             pipeline cluster-upgrade    <-- Upgrade Model Server Cluster
+(Enterprise)
+             pipeline cluster-connect     <-- Create Secure Tunnel to Model Server Cluster 
+             pipeline cluster-describe    <-- Describe Model Server Cluster
+             pipeline cluster-logs        <-- View Model Server Cluster Logs 
+             pipeline cluster-quarantine  <-- Remove Instance from Model Server Cluster (Forensics)
+             pipeline cluster-rollback    <-- Rollback Model Server Cluster
+             pipeline cluster-scale       <-- Scale Model Server Cluster
+             pipeline cluster-shell       <-- Shell into Model Server Cluster
+             pipeline cluster-start       <-- Start Model Server Cluster 
+             pipeline cluster-status      <-- Describe Model Server Cluster Status
+             pipeline cluster-stop        <-- Stop Model Server Cluster
+             pipeline cluster-train       <-- Train Model on Distributed Cluster of Servers
+             pipeline cluster-upgrade     <-- Upgrade Model Server Cluster
 
-(Standalone) pipeline optimize-model     <-- Optimize Model for Prediction
+(Standalone) pipeline optimize-generate   <-- Optimize Model for Prediction
 
-(Community)  pipeline predict-model      <-- Predict with Model Server
+(Community)  pipeline prediction-loadtest <-- Prediction Load Test on Model Server
+             pipeline prediction-test     <-- Prediction Test on Model Server
 
-(Community)  pipeline server-build       <-- Build Model Server
-             pipeline server-logs        <-- View Model Server Logs
-             pipeline server-pull        <-- Pull from Model Server Registry (docker pull)
-             pipeline server-push        <-- Push to Model Server Registry (docker push)
-             pipeline server-shell       <-- Shell into Model Server (Forensics)
-             pipeline server-start       <-- Start Model Server
-             pipeline server-stop        <-- Stop Model Server
-             pipeline server-train       <-- Train Model on Server
+(Enterprise) pipeline router-deregister   <-- De-register a Model Server Cluster
+             pipeline router-register     <-- Register a Model Server Cluster
+             pipeline router-shadow       <-- Duplicate Traffic to Model Server Cluster (Shadowed Canary)
+             pipeline router-split        <-- Split Traffic within Model Server Cluster (Split Canary)
 
-(Community)  pipeline version            <-- View CLI Version
+(Community)  pipeline server-build        <-- Build Model Server
+             pipeline server-logs         <-- View Model Server Logs
+             pipeline server-pull         <-- Pull from Model Server Registry (docker pull)
+             pipeline server-push         <-- Push to Model Server Registry (docker push)
+             pipeline server-shell        <-- Shell into Model Server (Forensics)
+             pipeline server-start        <-- Start Model Server
+             pipeline server-stop         <-- Stop Model Server
+             pipeline server-train        <-- Train Model on Single Server
+
+(Community)  pipeline version             <-- View This CLI Version
 ```
 
 # Prepare Model Samples
-## Clone the PipelineAI Models Repo
+## Clone the PipelineAI Predict Repo
 ```
 git clone https://github.com/PipelineAI/predict
 ```

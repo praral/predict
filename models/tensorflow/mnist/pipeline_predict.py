@@ -8,7 +8,7 @@ from pipeline_monitor import prometheus_monitor as monitor
 from pipeline_logger import log
 from pipeline_logger.kafka_handler import KafkaHandler
 
-_logger = logging.getLogger('model_logger')
+_logger = logging.getLogger('pipeline-logger')
 _logger.setLevel(logging.INFO)
 _logger_stream_handler = logging.StreamHandler()
 _logger_stream_handler.setLevel(logging.INFO)
@@ -32,7 +32,7 @@ def _initialize_upon_import() -> TensorFlowServingModel:
     '''
     return TensorFlowServingModel(host='localhost', 
                                   port=9000,
-                                  model_name='mnist',
+                                  model_name=os.environ['PIPELINE_MODEL_NAME'],
                                   inputs_name='inputs',
                                   outputs_name='outputs',
                                   timeout=100)

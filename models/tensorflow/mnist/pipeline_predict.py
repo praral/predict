@@ -48,7 +48,9 @@ def predict(request: bytes) -> bytes:
         predictions = _model.predict(transformed_request)
 
     with monitor(labels=_labels, name="transform_response"):
-        return _transform_response(predictions)
+        transformed_response = _transform_response(predictions)
+
+    return transformed_response
 
 
 def _transform_request(request: bytes) -> np.array:

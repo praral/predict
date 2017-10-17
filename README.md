@@ -122,6 +122,7 @@ versions/                          <-- Optional.  If directory exists, we start 
 ```
 
 ## Inspect PipelineAI Predict Module `./models/tensorflow/mnist/pipeline_predict.py`
+_Note:  Only the `predict()` method is required.  Everything else is optional._
 ```
 cat ./models/tensorflow/mnist/pipeline_predict.py
 
@@ -170,7 +171,8 @@ def predict(request: bytes) -> bytes:                         <-- Required.  Cal
 ...
 ```
 
-## Build Example Model into Docker Image
+## Build the Model into a Runnable Docker Image
+This command bundles the TensorFlow runtime with the model.
 ```
 pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=v1 --model-path=./models/tensorflow/mnist
 ```
@@ -275,6 +277,7 @@ http://localhost:3000/
 ![Prediction Dashboard](http://pipeline.ai/assets/img/request-metrics-breakdown.png)
 
 _Username/Password: **admin**/**admin**_
+
 _Set `Type` to `Prometheues`._
 
 _Set `Url` to `http://localhost:9090`._

@@ -114,11 +114,11 @@ cd predict
 ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
-pipeline_conda_environment.yml <-- Required.  Sets up the conda environment
-pipeline_install.sh            <-- Optional.  If file exists, we run it
-pipeline_predict.py            <-- Required.  `predict(request: bytes) -> bytes` is required
-pipeline_train.py              <-- Optional.  `main()` is called to train the model
-versions/                      <-- Optional.  If directory exists, we start TensorFlow Serving
+pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
+pipeline_install.sh                <-- Optional.  If file exists, we run it
+pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
+pipeline_train.py                  <-- Optional.  `main()` to train the model
+versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
 ```
 
 ## Inspect PipelineAI Predict Module `./models/tensorflow/mnist/pipeline_predict.py`
@@ -134,7 +134,7 @@ from pipeline_logger import log                               <-- Optional.  Log
 
 ...
 
-__all__ = ['predict'] <-- Optional.  Nice to have as a good Python citizen.
+__all__ = ['predict']                                         <-- Optional.  Being a good Python citizen.
 
 ...
 

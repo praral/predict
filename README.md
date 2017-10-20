@@ -73,8 +73,9 @@ Usage:       pipeline                     <-- This List of CLI Commands
 
 (Community)  pipeline predict             <-- Predict with Model Server or Cluster
 
-(Enterprise) pipeline experiment-add      <-- Add Model Server Cluster to Experiment (Shadow or Split % of Traffic)
-             pipeline experiment-start    <-- Push an Experiment to Production
+(Enterprise) pipeline experiment-add      <-- Add Model Server Cluster to Experiment (Shadow or Live Traffic)
+             pipeline experiment-start    <-- Start an Experiment (ie. Start Taking Shadow or Live Traffic)
+             pipeline experiment-stop     <-- Stop an Experiment to Production
              pipeline experiment-status   <-- Status of Experiment
              pipeline experiment-update   <-- Update an Experiment (ie. % of Traffic to Each Model Server Cluster) 
 

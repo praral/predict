@@ -36,7 +36,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.3.6 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.3.7 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -47,8 +47,8 @@ pipeline version
 cli_version: 1.3.7
 api_version: v1
 
-capabilities_enabled: ['server', 'prediction', 'version']
-capabilities_disabled: ['cluster', 'optimizer', 'traffic']
+capabilities_enabled: ['server', 'predict', 'version']
+capabilities_disabled: ['cluster', 'experiment', 'optimize']
 
 Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 ```
@@ -63,32 +63,26 @@ Usage:       pipeline                     <-- This List of CLI Commands
 (Enterprise) pipeline cluster-connect     <-- Create Secure Tunnel to Model Server Cluster 
              pipeline cluster-describe    <-- Describe Model Server Cluster
              pipeline cluster-logs        <-- View Model Server Cluster Logs 
-             pipeline cluster-quarantine  <-- Remove Instance from Model Server Cluster (Forensic Debugging)
-             pipeline cluster-rollback    <-- Rollback Model Server Cluster (undo cluster-rollout)
-             pipeline cluster-rollout     <-- Rollout New Version of Model Server Cluster
              pipeline cluster-scale       <-- Scale Model Server Cluster
              pipeline cluster-shell       <-- Shell into Model Server Cluster
              pipeline cluster-start       <-- Start Model Server Cluster (from Registry)
              pipeline cluster-status      <-- Status of Model Server Cluster
              pipeline cluster-stop        <-- Stop Model Server Cluster
 
-(Standalone) pipeline optimizer-generate  <-- Generate Optimized Models for a Given Model
+(Standalone) pipeline optimize-model      <-- Generate an Optimized Model from a Given Model
 
-(Community)  pipeline prediction-loadtest <-- Prediction Load Test on Model Server
-             pipeline prediction-test     <-- Prediction Test on Model Server
+(Community)  pipeline predict             <-- Predict with Model Server or Cluster
 
-(Enterprise) pipeline traffic-deregister  <-- De-register a Model Server Cluster from Taking Traffic
-             pipeline traffic-describe    <-- Show Traffic Status of a Model Server Cluster
-             pipeline traffic-register    <-- Register a Model Server Cluster to Take Traffic
-             pipeline traffic-shadow      <-- Duplicate Traffic to Model Server Cluster (Shadow Canary)
-             pipeline traffic-split       <-- Split Traffic within Model Server Cluster (Split Canary)
-             pipeline traffic-status      <-- Show Traffic Status of all Model Server Clusters
+(Enterprise) pipeline experiment-add      <-- Add Model Server Cluster to Experiment (Shadow or Split % of Traffic)
+             pipeline experiment-start    <-- Push an Experiment to Production
+             pipeline experiment-status   <-- Status of Experiment
+             pipeline experiment-update   <-- Update an Experiment (ie. % of Traffic to Each Model Server Cluster) 
 
 (Community)  pipeline server-build        <-- Build Model Server
              pipeline server-logs         <-- View Model Server Logs
              pipeline server-pull         <-- Pull Model Server from Registry (ie. docker pull)
              pipeline server-push         <-- Push Model Server to Registry (ie. docker push)
-             pipeline server-shell        <-- Shell into Model Server (Forensic Debugging)
+             pipeline server-shell        <-- Shell into Model Server (Debugging)
              pipeline server-start        <-- Start Model Server
              pipeline server-stop         <-- Stop Model Server
 

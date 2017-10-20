@@ -14,7 +14,7 @@ Each model is built into a separate Docker image with the appropriate Python, C+
 Use the same Docker Image from Local Laptop to Production to avoid dependency surprises.
 
 ## Supported Model Types 
-[scikit](https://github.com/PipelineAI/predict/tree/r1.3/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/r1.3/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [keras](https://github.com/PipelineAI/predict/tree/r1.3/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/r1.3/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/r1.3/models/spark/), [java](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/r1.3/models/xgboost/), R
+[scikit](https://github.com/PipelineAI/predict/tree/master/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/master/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/master/models/java/), [keras](https://github.com/PipelineAI/predict/tree/master/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/master/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/master/models/spark/), [java](https://github.com/PipelineAI/predict/tree/master/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/master/models/xgboost/), R
 
 More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 
@@ -71,7 +71,6 @@ Usage:       pipeline                     <-- This List of CLI Commands
              pipeline cluster-start       <-- Start Model Server Cluster (from Registry)
              pipeline cluster-status      <-- Status of Model Server Cluster
              pipeline cluster-stop        <-- Stop Model Server Cluster
-             pipeline cluster-train       <-- Train Model on Distributed Cluster of Servers
 
 (Standalone) pipeline optimizer-generate  <-- Generate Optimized Models for a Given Model
 
@@ -92,7 +91,6 @@ Usage:       pipeline                     <-- This List of CLI Commands
              pipeline server-shell        <-- Shell into Model Server (Forensic Debugging)
              pipeline server-start        <-- Start Model Server
              pipeline server-stop         <-- Stop Model Server
-             pipeline server-train        <-- Train Model on Single Server
 
 (Community)  pipeline version             <-- View This CLI Version
 ```
@@ -115,9 +113,7 @@ ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
-pipeline_install.sh                <-- Optional.  If file exists, we run it
 pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
-pipeline_train.py                  <-- Optional.  `main()` to train the model
 versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
 ```
 
@@ -147,7 +143,7 @@ def _initialize_upon_import() -> TensorFlowServingModel:      <-- Optional.  Cal
                                   outputs_name='outputs',     <-- Optional.  TensorFlow SignatureDef outputs
                                   timeout=100)                <-- Optional.  TensorFlow Serving timeout
 
-_model = _initialize_upon_import()  <-- Optional.  Called once upon server startup
+_model = _initialize_upon_import()                            <-- Optional.  Called once upon server startup
 
 _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'],   <-- Optional.  Tag metrics
            'model_name': os.environ['PIPELINE_MODEL_NAME'],
@@ -288,7 +284,7 @@ _Click `Save & Test`_.
 
 _Click `Dashboards -> Import` upper-left menu drop-down_.
 
-_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/r1.3/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
+_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/master/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
 
 _Select the Prometheus-based data source that you setup above and click `Import`_.
 

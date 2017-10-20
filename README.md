@@ -44,7 +44,7 @@ pip install cli-pipeline==1.3.6 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.6
+cli_version: 1.3.7
 api_version: v1
 
 capabilities_enabled: ['server', 'prediction', 'version']
@@ -176,7 +176,7 @@ _`model-path` must be a relative path._
 
 ## Start the Model Server
 ```
-pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=4G
+pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=2G
 ```
 _If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
 
@@ -204,7 +204,7 @@ _Try the call again if you see a "fallback" message._
 
 _Before proceeding, make sure you hit `ctrl-c` after viewing the logs in the command above._
 ```
-pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
+pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
 ### Expected Output ###
 {"outputs": [0.0022526539396494627, 2.63791100074684e-10, 0.4638307988643646, 0.21909376978874207, 3.2985670372909226e-07, 0.29357224702835083, 0.00019597385835368186, 5.230629176367074e-05, 0.020996594801545143, 5.426473762781825e-06]}
@@ -226,7 +226,7 @@ Digit  Confidence
 
 ### Perform 100 Predictions in Parallel (Mini Load Test)
 ```
-pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json --test-request-concurrency=100
+pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json --test-request-concurrency=100
 ```
 
 ## PipelineAI Prediction REST API

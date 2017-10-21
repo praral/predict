@@ -36,6 +36,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 [![PyPI version](https://badge.fury.io/py/cli-pipeline.svg)](https://badge.fury.io/py/cli-pipeline)
 [![GitHub version](https://badge.fury.io/gh/pipelineai%2Fpredict.svg)](https://badge.fury.io/gh/pipelineai%2Fpredict)
+
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
 pip install cli-pipeline==1.3.9 --ignore-installed --no-cache -U
@@ -46,11 +47,11 @@ pip install cli-pipeline==1.3.9 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.7
+cli_version: 1.3.9
 api_version: v1
 
-capabilities_enabled: ['server', 'predict', 'version']
-capabilities_disabled: ['cluster', 'experiment', 'optimize']
+capabilities_enabled: ['predict_server', 'predict', 'version']
+capabilities_disabled: ['predict_cluster', 'train_cluster', 'train_server', 'optimize', 'experiment']
 
 Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 ```
@@ -111,6 +112,7 @@ ls -l ./models/tensorflow/mnist
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
 pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
+pipeline_train.py                  <-- Optional.  If file exists, `main()` is called to train the model
 versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
 ```
 

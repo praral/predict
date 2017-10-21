@@ -14,7 +14,7 @@ Each model is built into a separate Docker image with the appropriate Python, C+
 Use the same Docker Image from Local Laptop to Production to avoid dependency surprises.
 
 ## Supported Model Types 
-[scikit](https://github.com/PipelineAI/predict/tree/r1.3/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/r1.3/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [keras](https://github.com/PipelineAI/predict/tree/r1.3/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/r1.3/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/r1.3/models/spark/), [java](https://github.com/PipelineAI/predict/tree/r1.3/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/r1.3/models/xgboost/), R
+[scikit](https://github.com/PipelineAI/predict/tree/master/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/master/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/master/models/java/), [keras](https://github.com/PipelineAI/predict/tree/master/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/master/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/master/models/spark/), [java](https://github.com/PipelineAI/predict/tree/master/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/master/models/xgboost/), R
 
 More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 
@@ -36,7 +36,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.3.6 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.3.10 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -44,11 +44,11 @@ pip install cli-pipeline==1.3.6 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.6
+cli_version: 1.3.10
 api_version: v1
 
-capabilities_enabled: ['server', 'prediction', 'version']
-capabilities_disabled: ['cluster', 'optimizer', 'traffic']
+capabilities_enabled: ['predict_server', 'predict', 'version']
+capabilities_disabled: ['predict_cluster', 'train_cluster', 'train_server', 'optimize', 'experiment']
 
 Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 ```
@@ -58,43 +58,53 @@ Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 pipeline
 
 ### EXPECTED OUTPUT ###
-Usage:       pipeline                     <-- This List of CLI Commands
+Usage:       pipeline                             <-- This List of CLI Commands
 
-(Enterprise) pipeline cluster-connect     <-- Create Secure Tunnel to Model Server Cluster 
-             pipeline cluster-describe    <-- Describe Model Server Cluster
-             pipeline cluster-logs        <-- View Model Server Cluster Logs 
-             pipeline cluster-quarantine  <-- Remove Instance from Model Server Cluster (Forensic Debugging)
-             pipeline cluster-rollback    <-- Rollback Model Server Cluster (undo cluster-rollout)
-             pipeline cluster-rollout     <-- Rollout New Version of Model Server Cluster
-             pipeline cluster-scale       <-- Scale Model Server Cluster
-             pipeline cluster-shell       <-- Shell into Model Server Cluster
-             pipeline cluster-start       <-- Start Model Server Cluster (from Registry)
-             pipeline cluster-status      <-- Status of Model Server Cluster
-             pipeline cluster-stop        <-- Stop Model Server Cluster
-             pipeline cluster-train       <-- Train Model on Distributed Cluster of Servers
+(Enterprise) pipeline experiment-add              <-- Add Cluster to Experiment
+             pipeline experiment-start            <-- Start Experiment
+             pipeline experiment-status           <-- Experiment Status (ie. Bandit-based Rewards)
+             pipeline experiment-stop             <-- Stop Experiment
+             pipeline experiment-update           <-- Update Experiment (ie. Bandit-based % Traffic Router)
 
-(Standalone) pipeline optimizer-generate  <-- Generate Optimized Models for a Given Model
+(Standalone) pipeline optimize                    <-- Perform Model and Runtime Hyper-Parameter Tuning
 
-(Community)  pipeline prediction-loadtest <-- Prediction Load Test on Model Server
-             pipeline prediction-test     <-- Prediction Test on Model Server
+(Community)  pipeline predict                     <-- Predict with Model Server or Cluster
+             
+(Enterprise) pipeline predict-cluster-connect     <-- Create Secure Tunnel to Prediction Cluster 
+             pipeline predict-cluster-describe    <-- Describe Prediction Cluster
+             pipeline predict-cluster-logs        <-- View Prediction Cluster Logs 
+             pipeline predict-cluster-scale       <-- Scale Prediction Cluster
+             pipeline predict-cluster-shell       <-- Shell into Prediction Cluster
+             pipeline predict-cluster-start       <-- Start Prediction Cluster from Docker Registry
+             pipeline predict-cluster-status      <-- Status of Predidction Cluster
+             pipeline predict-cluster-stop        <-- Stop Prediction Cluster
+             
+(Community)  pipeline predict-server-build        <-- Build Prediction Server
+             pipeline predict-server-logs         <-- View Prediction Server Logs
+             pipeline predict-server-pull         <-- Pull Prediction Server from Docker Registry
+             pipeline predict-server-push         <-- Push Prediction Server to Docker Registry
+             pipeline predict-server-shell        <-- Shell into Prediction Server (Debugging)
+             pipeline predict-server-start        <-- Start Prediction Server
+             pipeline predict-server-stop         <-- Stop Prediction Server
 
-(Enterprise) pipeline traffic-deregister  <-- De-register a Model Server Cluster from Taking Traffic
-             pipeline traffic-describe    <-- Show Traffic Status of a Model Server Cluster
-             pipeline traffic-register    <-- Register a Model Server Cluster to Take Traffic
-             pipeline traffic-shadow      <-- Duplicate Traffic to Model Server Cluster (Shadow Canary)
-             pipeline traffic-split       <-- Split Traffic within Model Server Cluster (Split Canary)
-             pipeline traffic-status      <-- Show Traffic Status of all Model Server Clusters
+(Enterprise) pipeline train-cluster-connect       <-- Create Secure Tunnel to Training Cluster
+             pipeline train-cluster-describe      <-- Describe Training Cluster
+             pipeline train-cluster-logs          <-- View Training Cluster Logs
+             pipeline train-cluster-scale         <-- Scale Training Cluster
+             pipeline train-cluster-shell         <-- Shell into Training Cluster
+             pipeline train-cluster-start         <-- Start Training Cluster from Docker Registry
+             pipeline train-cluster-status        <-- Status of Training Cluster
+             pipeline train-cluster-stop          <-- Stop Traininhg Cluster
 
-(Community)  pipeline server-build        <-- Build Model Server
-             pipeline server-logs         <-- View Model Server Logs
-             pipeline server-pull         <-- Pull Model Server from Registry (ie. docker pull)
-             pipeline server-push         <-- Push Model Server to Registry (ie. docker push)
-             pipeline server-shell        <-- Shell into Model Server (Forensic Debugging)
-             pipeline server-start        <-- Start Model Server
-             pipeline server-stop         <-- Stop Model Server
-             pipeline server-train        <-- Train Model on Single Server
-
-(Community)  pipeline version             <-- View This CLI Version
+(Standalone) pipeline train-server-build          <-- Build Prediction Server
+             pipeline train-server-logs           <-- View Prediction Server Logs
+             pipeline train-server-pull           <-- Pull Prediction Server from Docker Registry
+             pipeline train-server-push           <-- Push Prediction Server to Docker Registry
+             pipeline train-server-shell          <-- Shell into Prediction Server (Debugging)
+             pipeline train-server-start          <-- Start Prediction Server
+             pipeline train-server-stop           <-- Stop Prediction Server
+             
+(Community)  pipeline version                     <-- View This CLI Version
 ```
 
 # Prepare Model Samples
@@ -115,13 +125,13 @@ ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
-pipeline_install.sh                <-- Optional.  If file exists, we run it
 pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
-pipeline_train.py                  <-- Optional.  `main()` to train the model
+pipeline_train.py                  <-- Optional.  If file exists, `main()` is called to train the model
 versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
 ```
 
 ## Inspect PipelineAI Predict Module `./models/tensorflow/mnist/pipeline_predict.py`
+_Note:  Only the `predict()` method is required.  Everything else is optional._
 ```
 cat ./models/tensorflow/mnist/pipeline_predict.py
 
@@ -146,7 +156,7 @@ def _initialize_upon_import() -> TensorFlowServingModel:      <-- Optional.  Cal
                                   outputs_name='outputs',     <-- Optional.  TensorFlow SignatureDef outputs
                                   timeout=100)                <-- Optional.  TensorFlow Serving timeout
 
-_model = _initialize_upon_import()  <-- Optional.  Called once upon server startup
+_model = _initialize_upon_import()                            <-- Optional.  Called once upon server startup
 
 _labels = {'model_type': os.environ['PIPELINE_MODEL_TYPE'],   <-- Optional.  Tag metrics
            'model_name': os.environ['PIPELINE_MODEL_NAME'],
@@ -170,22 +180,23 @@ def predict(request: bytes) -> bytes:                         <-- Required.  Cal
 ...
 ```
 
-## Build Example Model into Docker Image
+## Build the Model into a Runnable Docker Image
+This command bundles the TensorFlow runtime with the model.
 ```
-pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=v1 --model-path=./models/tensorflow/mnist
+pipeline predict-server-build --model-type=tensorflow --model-name=mnist --model-tag=v1 --model-path=./models/tensorflow/mnist
 ```
 _`model-path` must be a relative path._
 
 ## Start the Model Server
 ```
-pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=4G
+pipeline predict-server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=2G
 ```
 _If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
 
 ## Monitor Runtime Logs
 Wait for the model runtime to settle...
 ```
-pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=v1
+pipeline predict-server-logs --model-type=tensorflow --model-name=mnist --model-tag=v1
 
 ### EXPECTED OUTPUT ###
 ...
@@ -206,7 +217,7 @@ _Try the call again if you see a "fallback" message._
 
 _Before proceeding, make sure you hit `ctrl-c` after viewing the logs in the command above._
 ```
-pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
+pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
 ### Expected Output ###
 {"outputs": [0.0022526539396494627, 2.63791100074684e-10, 0.4638307988643646, 0.21909376978874207, 3.2985670372909226e-07, 0.29357224702835083, 0.00019597385835368186, 5.230629176367074e-05, 0.020996594801545143, 5.426473762781825e-06]}
@@ -228,7 +239,7 @@ Digit  Confidence
 
 ### Perform 100 Predictions in Parallel (Mini Load Test)
 ```
-pipeline predict-model --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json --test-request-concurrency=100
+pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json --test-request-concurrency=100
 ```
 
 ## PipelineAI Prediction REST API
@@ -275,6 +286,7 @@ http://localhost:3000/
 ![Prediction Dashboard](http://pipeline.ai/assets/img/request-metrics-breakdown.png)
 
 _Username/Password: **admin**/**admin**_
+
 _Set `Type` to `Prometheues`._
 
 _Set `Url` to `http://localhost:9090`._
@@ -285,7 +297,7 @@ _Click `Save & Test`_.
 
 _Click `Dashboards -> Import` upper-left menu drop-down_.
 
-_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/r1.3/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
+_Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/master/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
 
 _Select the Prometheus-based data source that you setup above and click `Import`_.
 
@@ -293,7 +305,7 @@ _Create additional PipelineAI Prediction widgets using [THIS](https://prometheus
 
 ## Stop Model Server
 ```
-pipeline server-stop --model-type=tensorflow --model-name=mnist --model-tag=v1
+pipeline predict-server-stop --model-type=tensorflow --model-name=mnist --model-tag=v1
 ```
 
 # [PipelineAI Standalone and Enterprise Features](http://pipeline.ai/features)

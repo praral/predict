@@ -39,7 +39,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
-pip install cli-pipeline==1.3.9 --ignore-installed --no-cache -U
+pip install cli-pipeline==1.3.10 --ignore-installed --no-cache -U
 ```
 
 ## Verify Successful PipelineCLI Installation
@@ -47,7 +47,7 @@ pip install cli-pipeline==1.3.9 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.9
+cli_version: 1.3.10
 api_version: v1
 
 capabilities_enabled: ['predict_server', 'predict', 'version']
@@ -61,36 +61,53 @@ Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 pipeline
 
 ### EXPECTED OUTPUT ###
-Usage:       pipeline                     <-- This List of CLI Commands
+Usage:       pipeline                             <-- This List of CLI Commands
 
-(Enterprise) pipeline cluster-connect     <-- Create Secure Tunnel to Model Server Cluster 
-             pipeline cluster-describe    <-- Describe Model Server Cluster
-             pipeline cluster-logs        <-- View Model Server Cluster Logs 
-             pipeline cluster-scale       <-- Scale Model Server Cluster
-             pipeline cluster-shell       <-- Shell into Model Server Cluster
-             pipeline cluster-start       <-- Start Model Server Cluster (from Registry)
-             pipeline cluster-status      <-- Status of Model Server Cluster
-             pipeline cluster-stop        <-- Stop Model Server Cluster
+(Enterprise) pipeline experiment-add              <-- Add Cluster to Experiment
+             pipeline experiment-start            <-- Start Experiment
+             pipeline experiment-status           <-- Experiment Status (ie. Bandit-based Rewards)
+             pipeline experiment-stop             <-- Stop Experiment
+             pipeline experiment-update           <-- Update Experiment (ie. Bandit-based % Traffic Router)
 
-(Standalone) pipeline optimize-model      <-- Generate an Optimized Model from a Given Model
+(Standalone) pipeline optimize                    <-- Perform Model and Runtime Hyper-Parameter Tuning
 
-(Community)  pipeline predict             <-- Predict with Model Server or Cluster
+(Community)  pipeline predict                     <-- Predict with Model Server or Cluster
+             
+(Enterprise) pipeline predict-cluster-connect     <-- Create Secure Tunnel to Prediction Cluster 
+             pipeline predict-cluster-describe    <-- Describe Prediction Cluster
+             pipeline predict-cluster-logs        <-- View Prediction Cluster Logs 
+             pipeline predict-cluster-scale       <-- Scale Prediction Cluster
+             pipeline predict-cluster-shell       <-- Shell into Prediction Cluster
+             pipeline predict-cluster-start       <-- Start Prediction Cluster from Docker Registry
+             pipeline predict-cluster-status      <-- Status of Predidction Cluster
+             pipeline predict-cluster-stop        <-- Stop Prediction Cluster
+             
+(Community)  pipeline predict-server-build        <-- Build Prediction Server
+             pipeline predict-server-logs         <-- View Prediction Server Logs
+             pipeline predict-server-pull         <-- Pull Prediction Server from Docker Registry
+             pipeline predict-server-push         <-- Push Prediction Server to Docker Registry
+             pipeline predict-server-shell        <-- Shell into Prediction Server (Debugging)
+             pipeline predict-server-start        <-- Start Prediction Server
+             pipeline predict-server-stop         <-- Stop Prediction Server
 
-(Enterprise) pipeline experiment-add      <-- Add Model Server Cluster to Experiment (Shadow or Live Traffic)
-             pipeline experiment-start    <-- Start an Experiment (ie. Start Taking Shadow or Live Traffic)
-             pipeline experiment-stop     <-- Stop an Experiment
-             pipeline experiment-status   <-- Status of Experiment
-             pipeline experiment-update   <-- Update an Experiment (ie. % of Traffic to Each Model Server Cluster) 
+(Enterprise) pipeline train-cluster-connect       <-- Create Secure Tunnel to Training Cluster
+             pipeline train-cluster-describe      <-- Describe Training Cluster
+             pipeline train-cluster-logs          <-- View Training Cluster Logs
+             pipeline train-cluster-scale         <-- Scale Training Cluster
+             pipeline train-cluster-shell         <-- Shell into Training Cluster
+             pipeline train-cluster-start         <-- Start Training Cluster from Docker Registry
+             pipeline train-cluster-status        <-- Status of Training Cluster
+             pipeline train-cluster-stop          <-- Stop Traininhg Cluster
 
-(Community)  pipeline server-build        <-- Build Model Server
-             pipeline server-logs         <-- View Model Server Logs
-             pipeline server-pull         <-- Pull Model Server from Registry (ie. docker pull)
-             pipeline server-push         <-- Push Model Server to Registry (ie. docker push)
-             pipeline server-shell        <-- Shell into Model Server (Debugging)
-             pipeline server-start        <-- Start Model Server
-             pipeline server-stop         <-- Stop Model Server
-
-(Community)  pipeline version             <-- View This CLI Version
+(Standalone) pipeline train-server-build          <-- Build Prediction Server
+             pipeline train-server-logs           <-- View Prediction Server Logs
+             pipeline train-server-pull           <-- Pull Prediction Server from Docker Registry
+             pipeline train-server-push           <-- Push Prediction Server to Docker Registry
+             pipeline train-server-shell          <-- Shell into Prediction Server (Debugging)
+             pipeline train-server-start          <-- Start Prediction Server
+             pipeline train-server-stop           <-- Stop Prediction Server
+             
+(Community)  pipeline version                     <-- View This CLI Version
 ```
 
 # Prepare Model Samples
@@ -169,20 +186,20 @@ def predict(request: bytes) -> bytes:                         <-- Required.  Cal
 ## Build the Model into a Runnable Docker Image
 This command bundles the TensorFlow runtime with the model.
 ```
-pipeline server-build --model-type=tensorflow --model-name=mnist --model-tag=v1 --model-path=./models/tensorflow/mnist
+pipeline predict-server-build --model-type=tensorflow --model-name=mnist --model-tag=v1 --model-path=./models/tensorflow/mnist
 ```
 _`model-path` must be a relative path._
 
 ## Start the Model Server
 ```
-pipeline server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=2G
+pipeline predict-server-start --model-type=tensorflow --model-name=mnist --model-tag=v1 --memory-limit=2G
 ```
 _If the port is already allocated, run `docker ps`, then `docker rm -f <container-id>`._
 
 ## Monitor Runtime Logs
 Wait for the model runtime to settle...
 ```
-pipeline server-logs --model-type=tensorflow --model-name=mnist --model-tag=v1
+pipeline predict-server-logs --model-type=tensorflow --model-name=mnist --model-tag=v1
 
 ### EXPECTED OUTPUT ###
 ...
@@ -291,7 +308,7 @@ _Create additional PipelineAI Prediction widgets using [THIS](https://prometheus
 
 ## Stop Model Server
 ```
-pipeline server-stop --model-type=tensorflow --model-name=mnist --model-tag=v1
+pipeline predict-server-stop --model-type=tensorflow --model-name=mnist --model-tag=v1
 ```
 
 # [PipelineAI Standalone and Enterprise Features](http://pipeline.ai/features)

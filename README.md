@@ -34,9 +34,6 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 * Install [Miniconda](https://conda.io/docs/install/quick.html) with Python3 Support
 
 ## Install PipelineCLI
-[![PyPI version](https://badge.fury.io/py/cli-pipeline.svg)](https://badge.fury.io/py/cli-pipeline)
-[![GitHub version](https://badge.fury.io/gh/pipelineai%2Fpredict.svg)](https://badge.fury.io/gh/pipelineai%2Fpredict)
-
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
 ``` 
 pip install cli-pipeline==1.3.10 --ignore-installed --no-cache -U

@@ -1,11 +1,11 @@
-[![GitHub PipelineAI Predict Version 1.3.0](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://badge.fury.io/gh/pipelineai%2Fpredict)
-[![PyPI PipelineAI CLI Version 1.3.10](https://badge.fury.io/py/cli-pipeline@2x.png)](https://badge.fury.io/py/cli-pipeline)
-
 # PipelineAI [Home](http://pipeline.ai)
 ![PipelineAI Home](http://pipeline.ai/assets/img/pipelineai-home.png)
 
 # PipelineAI [Products](http://pipeline.ai/products/)
 [Community Edition](http://pipeline.ai/products/), [Standalone Edition](http://pipeline.ai/products/), [Enterprise Edition](http://pipeline.ai/products/)
+
+[![GitHub PipelineAI Predict Version 1.3.0](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://badge.fury.io/gh/pipelineai%2Fpredict)
+[![PyPI PipelineAI CLI Version 1.3.10](https://badge.fury.io/py/cli-pipeline@2x.png)](https://badge.fury.io/py/cli-pipeline)
 
 # PipelineAI Core [Features](http://pipeline.ai/features)
 

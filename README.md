@@ -7,6 +7,19 @@
 [![GitHub PipelineAI Predict Version 1.3.0](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://github.com/PipelineAI/predict/tree/v1.3.0)
 [![PyPI PipelineAI CLI Version 1.3.10](https://badge.fury.io/py/cli-pipeline@2x.png)](https://pypi.python.org/pypi/cli-pipeline/1.3.10)
 
+# PipelineAI Resources
+[PipelineAI Open Source](https://github.com/PipelineAI/)
+
+[PipeilneAI + Kubernetes](https://github.com/PipelineAI/pipeline/wiki/)
+
+[PipelineAI 24x7 Global Support](https://support.pipeline.ai/)
+
+[TensorFlow + Spark + GPU Workshop](https://www.eventbrite.com/d/worldwide/pipelineai/?mode=search)
+
+[AWS + GPU](https://github.com/PipelineAI/pipeline/wiki/AWS-GPU-TensorFlow-Docker)
+
+[Google Cloud + GPU](https://github.com/PipelineAI/pipeline/wiki/GCP-GPU-TensorFlow-Docker)
+
 # PipelineAI Core [Features](http://pipeline.ai/features)
 
 ## Consistent, Immutable, Reproducible Model Runtimes
@@ -342,16 +355,3 @@ Click [HERE](http://pipeline.ai/products) to compare PipelineAI Products.
 
 ## Continuously Fix Borderline Predictions through Crowd Sourcing 
 ![Borderline Prediction Fixing and Crowd Sourcing](http://pipeline.ai/assets/img/fix-slack.png)
-
-# Useful PipelineAI Resources
-Click [HERE](https://github.com/PipelineAI/) for more info on PipelineAI Open Source.
-
-Click [HERE](https://github.com/PipelineAI/pipeline/wiki/) for more info on PipelineAI + Kubernetes.
-
-Click [HERE](https://support.pipeline.ai/) for 24x7 PipelineAI Support.
-
-Click [HERE](https://www.eventbrite.com/d/worldwide/pipelineai/?mode=search) for our TensorFlow, Spark, and GPU workshops.
-
-Click [HERE](https://github.com/PipelineAI/pipeline/wiki/AWS-GPU-TensorFlow-Docker) to setup AWS + GPUs.
-
-Click [HERE](https://github.com/PipelineAI/pipeline/wiki/GCP-GPU-TensorFlow-Docker) to setup Google Cloud + GPUs.

@@ -14,7 +14,7 @@
 [![GitHub PipelineAI Predict Version 1.3.0](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://github.com/PipelineAI/predict/tree/v1.3.0)
 [![PyPI PipelineAI CLI Version 1.3.10](https://badge.fury.io/py/cli-pipeline@2x.png)](https://pypi.python.org/pypi/cli-pipeline/1.3.10)
 
-[PipeilneAI + Kubernetes](https://github.com/PipelineAI/pipeline/wiki/)
+[PipelineAI + Kubernetes](https://github.com/PipelineAI/pipeline/wiki/)
 
 [PipelineAI 24x7 Global Support](https://support.pipeline.ai/)
 

@@ -39,7 +39,7 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 
 ![Nvidia GPU](http://pipeline.ai/img/nvidia-cuda-338x181.png) ![TensorFlow](http://pipeline.ai/img/tensorflow-logo-202x168.png) 
 
-![Spark ML](http://pipeline.ai/img/spark-logo-254x163.png) ![Scikit-Learn](http://pipeline.ai/img/scikit-logo-277x150.png) 
+![Spark ML](http://pipeline.ai/img/spark-logo-24x163.png) ![Scikit-Learn](http://pipeline.ai/img/scikit-logo-277x150.png) 
 
 ![R](http://pipeline.ai/img/r-logo-280x212.png) ![PMML](http://pipeline.ai/img/pmml-logo-210x96.png)
 
@@ -325,7 +325,7 @@ _Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/mast
 
 _Select the Prometheus-based data source that you setup above and click `Import`_.
 
-_Change the Date Range in the upper right to `Last 5m` and the Refresh Every to `5s'._
+_Change the Date Range in the upper right to `Last 5m` and the Refresh Every to `5s`._
 
 _Create additional PipelineAI Prediction widgets using [THIS](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations) guide to the Prometheus Syntax._
 

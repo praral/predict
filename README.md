@@ -236,6 +236,8 @@ _The first call takes 10-20x longer than subsequent calls (and may timeout causi
 _Try the call again if you see a "fallback" message._
 
 _Before proceeding, make sure you hit `ctrl-c` after viewing the logs in the command above._
+
+_You may see `502 Bad Gateway` if you predict too quickly.  Let the server startup completely, then predict again._
 ```
 pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 

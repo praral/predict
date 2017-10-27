@@ -11,8 +11,7 @@
 # PipelineAI Resources
 [PipelineAI Open Source](https://github.com/PipelineAI/)
 
-[![GitHub PipelineAI Predict Version 1.3.0](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://github.com/PipelineAI/predict/tree/v1.3.0)
-[![PyPI PipelineAI CLI Version 1.3.10](https://badge.fury.io/py/cli-pipeline@2x.png)](https://pypi.python.org/pypi/cli-pipeline/1.3.10)
+[![GitHub PipelineAI Predict Version 1.3.1](https://badge.fury.io/gh/pipelineai%2Fpredict@2x.png)](https://github.com/PipelineAI/predict/tree/v1.3.1)
 
 [PipelineAI + Kubernetes](https://github.com/PipelineAI/pipeline/wiki/)
 
@@ -64,7 +63,7 @@ pip install cli-pipeline==1.3.10 --ignore-installed --no-cache -U
 pipeline version
 
 ### EXPECTED OUTPUT ###
-cli_version: 1.3.10
+cli_version: 1.3.10     <-- MAKE SURE YOU ARE ON THIS VERSION OR BAD THINGS MAY HAPPEN!
 api_version: v1
 
 capabilities_enabled: ['predict_server', 'predict', 'version']
@@ -133,9 +132,15 @@ Usage:       pipeline                             <-- This List of CLI Commands
 git clone https://github.com/PipelineAI/predict
 ```
 
+
 ## Change into `predict` Directory
 ```
 cd predict 
+```
+
+## Switch to Latest Release Branch (r1.3)
+```
+git checkout r1.3
 ```
 
 # Model Predictions
@@ -146,7 +151,6 @@ ls -l ./models/tensorflow/mnist
 ### EXPECTED OUTPUT ###
 pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
 pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
-pipeline_train.py                  <-- Optional.  If file exists, `main()` is called to train the model
 versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
 ```
 
@@ -231,13 +235,11 @@ _You need to `ctrl-c` out of the log viewing before proceeding._
 
 ## PipelineAI Prediction CLI
 ### Perform Prediction
-_The first call takes 10-20x longer than subsequent calls (and may timeout causing a "fallback" message) due to lazy initialization and warm-up._
-
-_Try the call again if you see a "fallback" message._
-
-_Before proceeding, make sure you hit `ctrl-c` after viewing the logs in the command above._
-
 _You may see `502 Bad Gateway` if you predict too quickly.  Let the server startup completely, then predict again._
+
+_The first call takes 10-20x longer than subsequent calls for lazy initialization and warm-up. Predict again if you see a "fallback" message._
+
+_Before proceeding, make sure you hit `ctrl-c` after viewing the logs in the previous step._
 ```
 pipeline predict --model-type=tensorflow --model-name=mnist --model-tag=v1 --predict-server-url=http://localhost:6969 --test-request-path=./models/tensorflow/mnist/data/test_request.json
 
@@ -322,6 +324,8 @@ _Click `Dashboards -> Import` upper-left menu drop-down_.
 _Copy and Paste [THIS](https://raw.githubusercontent.com/PipelineAI/predict/master/dashboard/grafana/pipelineai-prediction-dashboard.json) raw json file into the `paste JSON` box_.
 
 _Select the Prometheus-based data source that you setup above and click `Import`_.
+
+_Change the Date Range in the upper right to `Last 5m` and the Refresh Every to `5s'._
 
 _Create additional PipelineAI Prediction widgets using [THIS](https://prometheus.io/docs/practices/histograms/#count-and-sum-of-observations) guide to the Prometheus Syntax._
 

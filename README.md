@@ -37,13 +37,13 @@ Use the same Docker Image from Local Laptop to Production to avoid dependency su
 
 More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 
-![Nvidia GPU](http://pipeline.ai/img/nvidia-cuda-338x181.png) ![TensorFlow](http://pipeline.ai/img/tensorflow-logo-202x168.png) 
+![Nvidia GPU](http://pipeline.ai/assets/img/nvidia-cuda-338x181.png) ![TensorFlow](http://pipeline.ai/assets/img/tensorflow-logo-202x168.png) 
 
-![Spark ML](http://pipeline.ai/img/spark-logo-24x163.png) ![Scikit-Learn](http://pipeline.ai/img/scikit-logo-277x150.png) 
+![Spark ML](http://pipeline.ai/assets/img/spark-logo-254x163.png) ![Scikit-Learn](http://pipeline.ai/assets/img/scikit-logo-277x150.png) 
 
-![R](http://pipeline.ai/img/r-logo-280x212.png) ![PMML](http://pipeline.ai/img/pmml-logo-210x96.png)
+![R](http://pipeline.ai/assets/img/r-logo-280x212.png) ![PMML](http://pipeline.ai/img/pmml-logo-210x96.png)
 
-![Xgboost](http://pipeline.ai/img/xgboost-logo-280x120.png) ![Ensembles](http://pipeline.ai/img/ensemble-logo-285x125.png)
+![Xgboost](http://pipeline.ai/assets/img/xgboost-logo-280x120.png) ![Ensembles](http://pipeline.ai/assets/img/ensemble-logo-285x125.png)
 
 # Pre-Requisites
 ## Docker

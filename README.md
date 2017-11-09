@@ -49,8 +49,8 @@ More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
 ## Docker
 * Install [Docker](https://www.docker.com/community-edition#/download)
 
-## Python3 (Conda is Optional)
-* Install [Miniconda](https://conda.io/docs/install/quick.html) with Python3 Support
+## Python2 or Python3 (Conda is Optional)
+* Install [Miniconda](https://conda.io/docs/install/quick.html) with Python3 (Preferred) Support
 
 ## Install PipelineCLI
 _Note: This command line interface requires **Python3** and **Docker** as detailed above._
@@ -73,6 +73,12 @@ Email `upgrade@pipeline.ai` to enable the advanced capabilities.
 ```
 
 ## Review CLI Functionality
+[Community Edition](http://pipeline.ai/products/)
+
+[Standalone Edition](http://pipeline.ai/products/)
+
+[Enterprise Edition](http://pipeline.ai/products/)
+
 ```
 pipeline
 
@@ -89,7 +95,8 @@ Usage:       pipeline                             <-- This List of CLI Commands
 
 (Community)  pipeline predict                     <-- Predict with Model Server or Cluster
              
-(Enterprise) pipeline predict-cluster-connect     <-- Create Secure Tunnel to Prediction Cluster 
+(Enterprise) pipeline predict-cluster-autoscale   <-- Configure AutoScaling for Prediction Cluster
+             pipeline predict-cluster-connect     <-- Create Secure Tunnel to Prediction Cluster 
              pipeline predict-cluster-describe    <-- Describe Prediction Cluster
              pipeline predict-cluster-logs        <-- View Prediction Cluster Logs 
              pipeline predict-cluster-scale       <-- Scale Prediction Cluster
@@ -132,15 +139,15 @@ Usage:       pipeline                             <-- This List of CLI Commands
 git clone https://github.com/PipelineAI/predict
 ```
 
-
 ## Change into `predict` Directory
 ```
 cd predict 
 ```
 
-## Switch to Latest Release Branch (r1.3)
+## Switch to Latest Branch (master)
+_Note:  Master may be unstable.  See Releases Tab for stable releases._
 ```
-git checkout r1.3
+git checkout master
 ```
 
 # Model Predictions
@@ -149,12 +156,14 @@ git checkout r1.3
 ls -l ./models/tensorflow/mnist
 
 ### EXPECTED OUTPUT ###
+...
 pipeline_conda_environment.yml     <-- Required.  Sets up the conda environment
 pipeline_predict.py                <-- Required.  `predict(request: bytes) -> bytes` is required
 versions/                          <-- Optional.  If directory exists, we start TensorFlow Serving
+...
 ```
 
-## Inspect PipelineAI Predict Module `./models/tensorflow/mnist/pipeline_predict.py`
+## Inspect `pipeline_predict.py`
 _Note:  Only the `predict()` method is required.  Everything else is optional._
 ```
 cat ./models/tensorflow/mnist/pipeline_predict.py

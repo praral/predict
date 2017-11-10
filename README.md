@@ -33,9 +33,9 @@ Each model is built into a separate Docker image with the appropriate Python, C+
 Use the same Docker Image from Local Laptop to Production to avoid dependency surprises.
 
 ## Supported Model Types 
-[scikit](https://github.com/PipelineAI/predict/tree/master/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/master/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/master/models/java/), [keras](https://github.com/PipelineAI/predict/tree/master/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/master/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/master/models/spark/), [java](https://github.com/PipelineAI/predict/tree/master/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/master/models/xgboost/), R
+[scikit](https://github.com/PipelineAI/predict/tree/master/predict/models/scikit/), [tensorflow](https://github.com/PipelineAI/predict/tree/master/predict/models/tensorflow/), [python](https://github.com/PipelineAI/predict/tree/master/predict/models/java/), [keras](https://github.com/PipelineAI/predict/tree/master/predict/models/keras/), [pmml](https://github.com/PipelineAI/predict/tree/master/predict/models/pmml/), [spark](https://github.com/PipelineAI/predict/tree/master/predict/models/spark/), [java](https://github.com/PipelineAI/predict/tree/master/predict/models/java/), [xgboost](https://github.com/PipelineAI/predict/tree/master/predict/models/xgboost/), R
 
-More [model samples](https://github.com/PipelineAI/models) coming soon (ie. R).
+More [model samples](https://github.com/PipelineAI/predict/models) coming soon (ie. R).
 
 ![Nvidia GPU](http://pipeline.ai/assets/img/nvidia-cuda-338x181.png) ![TensorFlow](http://pipeline.ai/assets/img/tensorflow-logo-202x168.png) 
 
